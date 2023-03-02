@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+  background: #e74c3c;
+}
+
+#canvas {
+  position: relative;
+  left: 0;
+  top: 50px;
+  border: 1px dotted black;
+  cursor: crosshair;
+  background: #ecf0f1;
+}
