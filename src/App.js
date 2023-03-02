@@ -13,6 +13,11 @@ function App() {
     context.strokeStyle = "#913d88";
     context.lineWidth = 10;
 
+    context.fillStyle = "red";
+    context.fillRect(0, 0, 800, 500);
+    context.fillStyle = "lime";
+    context.fillRect(400, 0, 100, 500);
+
     canvas.onmousedown = startDrawing;
     canvas.onmouseup = stopDrawing;
     canvas.onmousemove = draw;
@@ -28,8 +33,22 @@ function App() {
         var x = e.pageX - canvas.offsetLeft;
         var y = e.pageY - canvas.offsetTop;
 
+        var rgba = context.getImageData(x, y, 1, 1).data;
+
+        if (rgba[0] === 255 && rgba[1] === 0 && rgba[2] === 0) {
+          console.log(false);
+        } else if (rgba[0] === 0 && rgba[1] === 255 && rgba[2] === 0) {
+          console.log(true);
+        }
+
         context.lineTo(x, y);
         context.stroke();
+      } else {
+        var x = e.clientX;
+        var y = e.clientY;
+
+        var rgba = context.getImageData(x, y, 1, 1).data;
+        // console.log(rgba[0], rgba[1], rgba[2]);
       }
     }
 
