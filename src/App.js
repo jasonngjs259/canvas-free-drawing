@@ -8,10 +8,6 @@ function App() {
   window.onload = function () {
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
-    canvasGreen = document.getElementById("greenArea");
-    contextGreen = canvasGreen.getContext("2d");
-    canvasRed = document.getElementById("redArea");
-    contextRed = canvasRed.getContext("2d");
     canvas.width = 1000;
     canvas.height = 900;
     context.strokeStyle = "#913d88";
@@ -48,8 +44,6 @@ function App() {
   return (
     <div className="App">
       <canvas id="canvas"></canvas>
-      <canvas id="greenArea"></canvas>
-      <canvas id="redArea"></canvas>
     </div>
   );
 }
