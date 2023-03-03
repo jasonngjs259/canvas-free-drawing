@@ -6,26 +6,33 @@ function App() {
   var isDrawing = false;
   var drawingResult = -1;
   var checkDrawingResult = false;
+  // var canvasStep = -1;
 
   window.onload = function () {
     canvas = document.getElementById("canvas");
-    context = canvas.getContext("2d");
+    context = canvas.getContext("2d", { willReadFrequently: true });
     canvas.width = 1000;
     canvas.height = 900;
     context.strokeStyle = "blue";
     context.lineWidth = 10;
 
-    context.fillStyle = "red";
-    context.fillRect(0, 0, 800, 500);
-    context.fillStyle = "lime";
-    context.save();
-    context.rotate((45 * Math.PI) / 180);
-    context.fillRect(300, -300, 100, 500);
-    context.restore();
-
     canvas.onmousedown = startDrawing;
     canvas.onmouseup = stopDrawing;
     canvas.onmousemove = draw;
+
+    function drawInitial() {
+      context.fillStyle = "rgba(255, 0, 0, 0)";
+      context.fillRect(0, 0, 800, 900);
+      context.fillStyle = "rgba(0, 255, 0, 1)";
+      context.save();
+      context.rotate((75 * Math.PI) / 180);
+      context.fillRect(200, -600, 100, 500);
+      context.restore();
+      context.save();
+      context.rotate((285 * Math.PI) / 180);
+      context.fillRect(-210, 200, 100, 525);
+      context.restore();
+    }
 
     function startDrawing(e) {
       isDrawing = true;
@@ -65,12 +72,13 @@ function App() {
       }
 
       console.log(checkDrawingResult);
-
       drawingResult = -1;
 
       // Clear drawed line
-      // context.clearRect(0, 0, canvas.width, canvas.height);
+      drawInitial();
     }
+
+    drawInitial();
   };
 
   return (
