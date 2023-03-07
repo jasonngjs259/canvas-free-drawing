@@ -10,6 +10,7 @@ function App() {
   var startPointY = 0;
   var endPointX = 0;
   var endPointY = 0;
+  var isMouseLeave = 0;
 
   window.onload = function () {
     canvas = document.getElementById("canvas");
@@ -22,7 +23,14 @@ function App() {
     canvas.onmousedown = startDrawing;
     canvas.onmouseup = stopDrawing;
     canvas.onmousemove = draw;
-    if (isDrawing === true) canvas.onmouseleave = stopDrawing;
+    canvas.onmouseleave = stopDrawing2;
+
+    function stopDrawing2() {
+      if (isDrawing) {
+        stopDrawing();
+        isDrawing = false;
+      }
+    }
 
     function calculateRedLine() {
       let count = 0;
@@ -142,11 +150,11 @@ function App() {
 
     function stopDrawing(e) {
       isDrawing = false;
-      endPointX = e.pageX - canvas.offsetLeft;
-      endPointY = e.pageY - canvas.offsetTop;
+      // endPointX = e.pageX - canvas.offsetLeft;
+      // endPointY = e.pageY - canvas.offsetTop;
 
-      console.log(calculateRedLine());
-      console.log(calculateWhiteDots());
+      // console.log(calculateRedLine());
+      // console.log(calculateWhiteDots());
 
       let totalRed = calculateRedLine();
       let totalWhite = calculateWhiteDots();
@@ -163,7 +171,7 @@ function App() {
         checkDrawingResult = false;
       }
 
-      console.log(checkDrawingResult);
+      // console.log(checkDrawingResult);
       // document.getElementById("result").innerHTML =
       //   "Result: " +
       //   checkDrawingResult +
@@ -188,6 +196,7 @@ function App() {
     }
 
     drawInitial();
+
     // console.log(calculateWhiteDots());
   };
 
