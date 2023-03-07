@@ -16,8 +16,8 @@
 
 #canvas {
   position: relative;
-  left: 250px;
-  top: 350px;
+  left: 350px;
+  top: 250px;
   border: 1px solid black;
   cursor: crosshair;
   /* background: #ecf0f1; */
