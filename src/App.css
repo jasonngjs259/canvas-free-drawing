@@ -1,8 +1,6 @@
 .App {
   /* text-align: center; */
   background: #e74c3c;
-  background-image: url("../../../frisco2/frisco-player-client/src/images/minigame/firstAid/torso.png");
-  background-repeat: no-repeat;
   height: 9000px;
   width: 1000px;
 }
