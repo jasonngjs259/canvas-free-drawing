@@ -1,14 +1,43 @@
 .App {
   /* text-align: center; */
   background: #e74c3c;
+  background-image: url("../../../frisco2/frisco-player-client/src/images/minigame/firstAid/torso.png");
+  background-repeat: no-repeat;
+  height: 9000px;
+  width: 1000px;
+}
+
+.canvasContainer {
+  height: 100px;
+  position: absolute;
+  /* top: 350px;
+  left: 250px; */
+  top: 350px;
+  left: 0;
 }
 
 #canvas {
   position: relative;
-  left: 0;
-  top: 0;
-  border: 1px dotted black;
+  left: 250px;
+  top: 350px;
+  /* border: 1px dotted black; */
   cursor: crosshair;
-  background: #ecf0f1;
+  /* background: #ecf0f1; */
+  background: transparent;
   opacity: 0.9;
+}
+
+#result {
+  position: absolute;
+  top: 0;
+  left: 1000px;
+  border: 1px solid black;
+  width: 300px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  font-weight: 500;
+  color: black;
 }

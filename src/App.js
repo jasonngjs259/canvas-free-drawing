@@ -8,23 +8,26 @@ function App() {
   var checkDrawingResult = false;
   var startPointX = 0;
   var startPointY = 0;
+  var endPointX = 0;
+  var endPointY = 0;
 
   window.onload = function () {
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d", { willReadFrequently: true });
-    canvas.width = 1000;
-    canvas.height = 900;
+    canvas.width = 80;
+    canvas.height = 100;
     context.strokeStyle = "blue";
-    context.lineWidth = 10;
+    context.lineWidth = 1;
 
     canvas.onmousedown = startDrawing;
     canvas.onmouseup = stopDrawing;
     canvas.onmousemove = draw;
+    if (isDrawing === true) canvas.onmouseleave = stopDrawing;
 
     function drawDottedLine(fromX, fromY, toX, toY) {
       context.lineWidth = 2;
       context.strokeStyle = "black";
-      context.setLineDash([5, 15]);
+      context.setLineDash([1, 1]);
 
       context.moveTo(fromX, fromY);
       context.lineTo(toX, toY);
@@ -32,28 +35,42 @@ function App() {
     }
 
     function drawInitial() {
-      context.fillStyle = "rgba(255, 0, 0, 1)"; // red
-      context.fillRect(0, 0, 800, 900);
-      context.fillStyle = "rgba(0, 255, 0, 1)"; // lime
+      context.fillStyle = "rgba(255, 0, 0, 0.1)"; // red
+      context.fillRect(0, 0, 80, 100);
+      context.fillStyle = "rgba(0, 255, 0, 0.1)"; // lime
 
       context.beginPath();
 
       context.save();
       context.rotate((75 * Math.PI) / 180);
-      context.fillRect(200, -600, 100, 500);
-      drawDottedLine(250, -600, 250, -130);
+      context.fillRect(48, -50, 15, 55);
+      drawDottedLine(55, 5, 55, -48);
       context.restore();
 
       context.save();
       context.rotate((285 * Math.PI) / 180);
-      context.fillRect(-210, 200, 100, 525);
-      drawDottedLine(-160, 250, -160, 725);
+      context.fillRect(-30, 20, 15, 55);
+      drawDottedLine(-22, 20, -22, 70);
       context.restore();
+
+      context.save();
+      context.rotate((75 * Math.PI) / 180);
+      context.fillRect(20, -50, 15, 50);
+      drawDottedLine(28, -8, 28, -50);
+      context.restore();
+
+      //---------------------------------------------------
 
       // context.save();
       // context.rotate((285 * Math.PI) / 180);
-      // context.fillRect(-210, 200, 100, 525);
-      // drawDottedLine(-160, 250, -160, 725);
+      // context.fillRect(-470, 265, 100, 525);
+      // // drawDottedLine(-415, 315, -415, 770);
+      // context.restore();
+
+      // context.save();
+      // context.rotate((75 * Math.PI) / 180);
+      // context.fillRect(710, -475, 100, 525);
+      // // drawDottedLine(755, -455, 755, 50);
       // context.restore();
     }
 
@@ -67,8 +84,13 @@ function App() {
 
     function draw(e) {
       if (isDrawing === true) {
+        // console.log(e.target.getBoundingClientRect().top);
+        // console.log(e.pageX, e.pageY);
+        console.log(canvas.offsetLeft, canvas.offsetTop);
         let x = e.pageX - canvas.offsetLeft;
         let y = e.pageY - canvas.offsetTop;
+        // let x = e.pageX - canvas.offsetLeft;
+        // let y = e.pageY - canvas.offsetTop;
 
         let rgba = context.getImageData(x, y, 1, 1).data;
 
@@ -82,14 +104,17 @@ function App() {
           }
         }
 
+        // console.log(drawingResult);
+
         context.lineTo(x, y);
         context.stroke();
-        context.restore();
       }
     }
 
-    function stopDrawing() {
+    function stopDrawing(e) {
       isDrawing = false;
+      endPointX = e.pageX - canvas.offsetLeft;
+      endPointY = e.pageY - canvas.offsetTop;
 
       if (drawingResult === 1) {
         checkDrawingResult = true;
@@ -98,6 +123,19 @@ function App() {
       }
 
       console.log(checkDrawingResult);
+      document.getElementById("result").innerHTML =
+        "Result: " +
+        checkDrawingResult +
+        "<br />Start Point: (" +
+        startPointX +
+        ", " +
+        startPointY +
+        ")<br />End Point: (" +
+        endPointX +
+        ", " +
+        endPointY +
+        ")";
+
       drawingResult = -1;
 
       // Clear drawed line
@@ -108,9 +146,15 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <canvas id="canvas"></canvas>
-    </div>
+    <>
+      <div className="App">
+        <canvas id="canvas" />
+        {/* <div className="canvasContainer">
+          <canvas id="canvas" />
+        </div> */}
+        <div id="result" />
+      </div>
+    </>
   );
 }
 
