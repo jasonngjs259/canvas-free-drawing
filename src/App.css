@@ -16,13 +16,14 @@
 
 #canvas {
   position: relative;
-  left: 350px;
-  top: 250px;
+  left: 0;
+  top: 0;
   border: 1px solid black;
   cursor: crosshair;
   /* background: #ecf0f1; */
   background: transparent;
   opacity: 0.9;
+  touch-action: none;
 }
 
 #result {
