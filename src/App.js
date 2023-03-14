@@ -6,7 +6,7 @@ function App() {
   var isDrawing = false;
   var drawingResult = -1;
   var checkDrawingResult = false;
-  var isMobile = false;
+  var isMobile = true;
   var dottedLine = 0;
   var zigzag = [
     [
@@ -246,19 +246,19 @@ function App() {
   ];
 
   window.onload = function () {
-    if (
-      navigator.userAgent.match(/Android/i) ||
-      navigator.userAgent.match(/webOS/i) ||
-      navigator.userAgent.match(/iPhone/i) ||
-      navigator.userAgent.match(/iPad/i) ||
-      navigator.userAgent.match(/iPod/i) ||
-      navigator.userAgent.match(/BlackBerry/i) ||
-      navigator.userAgent.match(/Windows Phone/i)
-    ) {
-      isMobile = true;
-    } else {
-      isMobile = false;
-    }
+    // if (
+    //   navigator.userAgent.match(/Android/i) ||
+    //   navigator.userAgent.match(/webOS/i) ||
+    //   navigator.userAgent.match(/iPhone/i) ||
+    //   navigator.userAgent.match(/iPad/i) ||
+    //   navigator.userAgent.match(/iPod/i) ||
+    //   navigator.userAgent.match(/BlackBerry/i) ||
+    //   navigator.userAgent.match(/Windows Phone/i)
+    // ) {
+    //   isMobile = true;
+    // } else {
+    //   isMobile = false;
+    // }
 
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d", { willReadFrequently: true });
