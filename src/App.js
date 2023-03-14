@@ -9,8 +9,24 @@ function App() {
   var tempCollision = 0;
   var area = 0;
   var tempArea = 0;
+  var checkDrawingResult = false;
+  var isMobile = false;
 
   window.onload = function () {
+    if (
+      navigator.userAgent.match(/Android/i) ||
+      navigator.userAgent.match(/webOS/i) ||
+      navigator.userAgent.match(/iPhone/i) ||
+      navigator.userAgent.match(/iPad/i) ||
+      navigator.userAgent.match(/iPod/i) ||
+      navigator.userAgent.match(/BlackBerry/i) ||
+      navigator.userAgent.match(/Windows Phone/i)
+    ) {
+      isMobile = true;
+    } else {
+      isMobile = false;
+    }
+
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d", { willReadFrequently: true });
     canvas.width = 686;
@@ -22,6 +38,10 @@ function App() {
     canvas.onmouseup = stopDrawing;
     canvas.onmousemove = draw;
     canvas.onmouseleave = stopDrawing2;
+
+    canvas.ontouchstart = startDrawing;
+    canvas.ontouchend = stopDrawing;
+    canvas.ontouchmove = draw;
 
     const coordPoints = [
       { x: canvas.width, y: 0 },
@@ -55,10 +75,16 @@ function App() {
       isDrawing = true;
       context.beginPath();
 
-      context.moveTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
+      let x = isMobile
+        ? e.changedTouches[0].clientX - canvas.offsetLeft
+        : e.pageX - canvas.offsetLeft;
+      let y = isMobile
+        ? e.changedTouches[0].clientY - canvas.offsetTop
+        : e.pageY - canvas.offsetTop;
+      context.moveTo(x, y);
       initialPoint = {
-        x: e.pageX - canvas.offsetLeft,
-        y: e.pageY - canvas.offsetTop,
+        x: x,
+        y: y,
       };
 
       for (let a = 0; a < coordPoints.length; a += 1) {
@@ -81,8 +107,12 @@ function App() {
     }
 
     function draw(e) {
-      let x = e.pageX - canvas.offsetLeft;
-      let y = e.pageY - canvas.offsetTop;
+      let x = isMobile
+        ? e.changedTouches[0].clientX - canvas.offsetLeft
+        : e.pageX - canvas.offsetLeft;
+      let y = isMobile
+        ? e.changedTouches[0].clientY - canvas.offsetTop
+        : e.pageY - canvas.offsetTop;
 
       for (let a = 0; a < coordPoints.length; a += 1) {
         if (x < coordPoints[a].x && y < coordPoints[a].y) {
@@ -110,10 +140,15 @@ function App() {
     function stopDrawing() {
       isDrawing = false;
       console.log(tempCollision);
+      if (tempCollision >= collisions) {
+        checkDrawingResult = true;
+      }
       tempCollision = 0;
       tempArea = 0;
       area = 0;
       initialPoint = { x: 0, y: 0 };
+      document.getElementById("result").innerHTML =
+        "Result: " + checkDrawingResult;
       context.clearRect(0, 0, canvas.width, canvas.height);
       drawInitial();
     }
