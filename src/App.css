@@ -16,14 +16,15 @@
 
 #canvas {
   position: relative;
-  left: 350px;
-  top: 250px;
+  left: 50px;
+  top: 50px;
   border: 1px solid black;
   cursor: crosshair;
   /* background: #ecf0f1; */
   background: transparent;
   opacity: 0.9;
   touch-action: none;
+  z-index: 1;
 }
 
 #result {
@@ -39,4 +40,13 @@
   font-size: large;
   font-weight: 500;
   color: black;
+}
+
+#demoWound {
+  position: absolute;
+  top: 45%;
+  left: 0%;
+  width: 50%;
+  border-top: 5px solid purple;
+  transform: rotate(315deg);
 }
