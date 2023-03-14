@@ -87,39 +87,39 @@ function App() {
     ],
     [
       {
-        rotation: 80,
+        rotation: 15,
         coordinate: {
-          fromX: 60,
+          fromX: -35,
+          fromY: -30,
+          toX: 15,
+          toY: -30,
+        },
+      },
+      {
+        rotation: 345,
+        coordinate: {
+          fromX: -25,
+          fromY: -15,
+          toX: 25,
+          toY: -15,
+        },
+      },
+      {
+        rotation: 15,
+        coordinate: {
+          fromX: -25,
           fromY: 0,
-          toX: 60,
-          toY: -58,
+          toX: 25,
+          toY: 0,
         },
       },
       {
-        rotation: 285,
+        rotation: 345,
         coordinate: {
-          fromX: -28,
+          fromX: -30,
           fromY: 15,
-          toX: -28,
-          toY: 78,
-        },
-      },
-      {
-        rotation: 85,
-        coordinate: {
-          fromX: 30,
-          fromY: -6,
-          toX: 30,
-          toY: -65,
-        },
-      },
-      {
-        rotation: 285,
-        coordinate: {
-          fromX: -7,
-          fromY: 15,
-          toX: -7,
-          toY: 70,
+          toX: 20,
+          toY: 15,
         },
       },
     ],
