@@ -122,14 +122,10 @@ function App() {
         }
       }
 
-      // console.log(area);
-
       if (isDrawing === true) {
         if (tempArea !== area) {
           tempArea = area;
           tempCollision += 1;
-
-          // console.log(tempArea);
         }
 
         context.lineTo(x, y);
@@ -142,7 +138,10 @@ function App() {
       console.log(tempCollision);
       if (tempCollision >= collisions) {
         checkDrawingResult = true;
+      } else {
+        checkDrawingResult = false;
       }
+
       tempCollision = 0;
       tempArea = 0;
       area = 0;
